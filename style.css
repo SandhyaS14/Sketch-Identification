@@ -1,0 +1,50 @@
+body {
+    background: radial-gradient( #358765 0%, #97f628 33%, #396581 66%, #83e6f2 100%);
+}
+
+p {
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 25px;
+}
+
+span, button {
+    font-family: 'Petit Formal Script', cursive;
+    font-weight: 999;
+}
+
+#time {
+    float: right;
+    margin-right: 200px;
+}
+
+#score {
+    float: left;
+    margin-left: 200px;
+}
+
+#toDraw {
+    text-shadow: 5px 5px 1px #ff00f0;
+}
+
+h1 {
+    font-family: 'Petit Formal Script', cursive;
+}
+
+canvas 
+  {
+    border:5px solid white;
+    border-radius:20px;
+    margin-top:150px;
+    box-shadow:5px 5px 5px grey;
+    box-shadow: 1px 1px 38px #ffffff;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    background-color: white;
+}
+@keyframes example {
+
+    0% {box-shadow: 1px 1px 38px grey;}
+    50% {box-shadow: 1px 1px 38px white;}
+    100% {box-shadow: 1px 1px 38px grey;}
+}
