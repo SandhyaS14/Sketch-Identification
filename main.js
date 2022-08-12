@@ -43,18 +43,29 @@ score = 0;
 console.log(draw);
 document.getElementById("toDraw").innerHTML = "Sketch to be drawn: " + sketch.substring(0,1).toUpperCase()+sketch.substring(1);
 
+function preload() {
+    classifier = ml5.imageClassifier("DoodleNet")
+}
+
 function setup(){
     canvas = createCanvas(280, 280);
     canvas.center();
+    canvas.mouseReleased(classifyCanvas);
 }
 
 function draw(){
-    checkSketch();
+    strokeWeight(13);
+    stroke(0,0,255);
+
+    if (mouseIsPressed) {
+        line(pmouseX, pmouseY, mouseX, mouseY);
+    }
     if(drawnSketch == sketch){
         answerHolder = "set";
         score =+ 1;
         document.getElementById("score").innerHTML = "Score: " + score;
     }
+    checkSketch();
 }
 
 function checkSketch(){
@@ -78,5 +89,24 @@ function checkSketch(){
 }
 
 function updateCanvas() {
-    
+    background("white");
+    random = Math.floor((Math.random()*array1.length)+1);
+    sketch = array1[random];
+    document.getElementById("toDraw").innerHTML = "Sketch to be drawn: " + sketch.substring(0,1).toUpperCase()+sketch.substring(1);
+}
+
+function classifyCanvas() {
+    classifier.classify(canvas, gotResult);
+}
+
+function gotResult(error, results) {
+    if(error){
+        console.log(error);
+    }
+    else {
+        console.log(results);
+        drawnSketch = results[0].label;
+        document.getElementById("confidence").innerHTML = "Confidence: " + Math.round(results[0].confidence*100);
+        document.getElementById("predicted").innerHTML = "Your Sketch: " + drawnSketch.substring(0,1).toUpperCase()+drawnSketch.substring(1);
+    }
 }
